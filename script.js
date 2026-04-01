@@ -53,6 +53,20 @@ function createCat(x, y) {
     mouseVY = 0;
   });
 
+  img.addEventListener("touchstart", (e) => {
+    draggedCat = cat;
+    cat.isDragging = true;
+
+    const touch = e.touches[0];
+    offsetX = touch.clientX - cat.x;
+    offsetY = touch.clientY - cat.y;
+
+    lastMouseX = touch.clientX;
+    lastMouseY = touch.clientY;
+    mouseVX = 0;
+    mouseVY = 0;
+  });
+
   cats.push(cat);
   updateCat(cat);
 }
@@ -117,7 +131,31 @@ document.addEventListener("mousemove", (e) => {
   lastMouseY = e.clientY;
 });
 
+document.addEventListener("touchmove", (e) => {
+  if (!draggedCat) return;
+
+  const touch = e.touches[0];
+  draggedCat.x = touch.clientX - offsetX;
+  draggedCat.y = touch.clientY - offsetY;
+
+  mouseVX = touch.clientX - lastMouseX;
+  mouseVY = touch.clientY - lastMouseY;
+
+  lastMouseX = touch.clientX;
+  lastMouseY = touch.clientY;
+}, { passive: false });
+
 document.addEventListener("mouseup", () => {
+  if (!draggedCat) return;
+
+  draggedCat.isDragging = false;
+  draggedCat.vx = mouseVX;
+  draggedCat.vy = mouseVY;
+
+  draggedCat = null;
+});
+
+document.addEventListener("touchend", () => {
   if (!draggedCat) return;
 
   draggedCat.isDragging = false;
