@@ -25,17 +25,21 @@ function createCat(x, y) {
   img.style.pointerEvents = "auto";
   world.appendChild(img);
 
-  let size = 400 + Math.random() * 80;
+  const isMobile = window.innerWidth < 768;
+  let size;
   
-  // Make mcat4 smaller
   if (catImages[catImageIndex] === "mcat4.png") {
-    size = 200 + Math.random() * 50;
+    // mcat4 is smaller
+    size = isMobile ? 80 + Math.random() * 40 : 200 + Math.random() * 50;
+  } else {
+    // Other cats scale based on device
+    size = isMobile ? 120 + Math.random() * 60 : 400 + Math.random() * 80;
   }
 
   const cat = {
     el: img,
-    x: x,
-    y: y,
+    x: x || Math.max(0, Math.random() * (window.innerWidth - size)),
+    y: y || -size,
     vx: (Math.random() - 0.5) * 6,
     vy: Math.random() * 2,
     width: size,
@@ -169,11 +173,11 @@ document.addEventListener("touchend", () => {
   draggedCat.vy = mouseVY;
 
   draggedCat = null;
-});
-
-rainBtn.addEventListener("click", () => {
-  const isMobile = window.innerWidth < 768;
-  const catCount = isMobile ? 15 : 30;
+});2 : 30;
+  for (let i = 0; i < catCount; i++) {
+    createCat(
+      null,
+      nulle ? 15 : 30;
   for (let i = 0; i < catCount; i++) {
     createCat(
       Math.random() * (window.innerWidth - 200),
@@ -183,12 +187,12 @@ rainBtn.addEventListener("click", () => {
 });
 
 const isMobile = window.innerWidth < 768;
-const initialCats = isMobile ? 5 : 10;
+const initialCats = isMobile ? 3 : 10;
 
 for (let i = 0; i < initialCats; i++) {
   createCat(
-    Math.random() * (window.innerWidth - 200),
-    Math.random() * 200
+    null,
+    null
   );
 }
 
