@@ -38,8 +38,8 @@ function createCat(x, y) {
 
   const cat = {
     el: img,
-    x: x !== null && x !== undefined ? x : Math.max(0, Math.random() * (window.innerWidth - size)),
-    y: y !== null && y !== undefined ? y : Math.random() * (window.innerHeight * 0.5),
+    x: x !== null && x !== undefined ? x : Math.random() * window.innerWidth,
+    y: y !== null && y !== undefined ? y : Math.random() * window.innerHeight * 0.4,
     vx: (Math.random() - 0.5) * 6,
     vy: Math.random() * 2,
     width: size,
