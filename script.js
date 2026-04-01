@@ -172,7 +172,9 @@ document.addEventListener("touchend", () => {
 });
 
 rainBtn.addEventListener("click", () => {
-  for (let i = 0; i < 30; i++) {
+  const isMobile = window.innerWidth < 768;
+  const catCount = isMobile ? 15 : 30;
+  for (let i = 0; i < catCount; i++) {
     createCat(
       Math.random() * (window.innerWidth - 200),
       -Math.random() * 300
@@ -180,7 +182,10 @@ rainBtn.addEventListener("click", () => {
   }
 });
 
-for (let i = 0; i < 10; i++) {
+const isMobile = window.innerWidth < 768;
+const initialCats = isMobile ? 5 : 10;
+
+for (let i = 0; i < initialCats; i++) {
   createCat(
     Math.random() * (window.innerWidth - 200),
     Math.random() * 200
