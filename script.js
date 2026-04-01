@@ -38,8 +38,8 @@ function createCat(x, y) {
 
   const cat = {
     el: img,
-    x: x || Math.max(0, Math.random() * (window.innerWidth - size)),
-    y: y || -size,
+    x: x !== null && x !== undefined ? x : Math.max(0, Math.random() * (window.innerWidth - size)),
+    y: y !== null && y !== undefined ? y : Math.random() * (window.innerHeight * 0.5),
     vx: (Math.random() - 0.5) * 6,
     vy: Math.random() * 2,
     width: size,
@@ -173,15 +173,15 @@ document.addEventListener("touchend", () => {
   draggedCat.vy = mouseVY;
 
   draggedCat = null;
-});2 : 30;
+});
+
+rainBtn.addEventListener("click", () => {
+  const isMobile = window.innerWidth < 768;
+  const catCount = isMobile ? 12 : 30;
   for (let i = 0; i < catCount; i++) {
     createCat(
       null,
-      nulle ? 15 : 30;
-  for (let i = 0; i < catCount; i++) {
-    createCat(
-      Math.random() * (window.innerWidth - 200),
-      -Math.random() * 300
+      null
     );
   }
 });
