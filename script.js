@@ -6,7 +6,7 @@ const gravity = 0.35;
 const bounce = 0.8;
 const friction = 0.995;
 
-const catImage = "mcat.png";
+const catImages = ["mcat1.png", "mcat2.png", "mcat3.png", "mcat4.png",];
 
 let draggedCat = null;
 let offsetX = 0;
@@ -18,13 +18,19 @@ let mouseVY = 0;
 
 function createCat(x, y) {
   const img = document.createElement("img");
-  img.src = catImage;
+  const catImageIndex = Math.floor(Math.random() * catImages.length);
+  img.src = catImages[catImageIndex];
   img.className = "cat";
   img.draggable = false;
   img.style.pointerEvents = "auto";
   world.appendChild(img);
 
-  const size = 400 + Math.random() * 80;
+  let size = 400 + Math.random() * 80;
+  
+  // Make mcat4 smaller
+  if (catImages[catImageIndex] === "mcat4.png") {
+    size = 200 + Math.random() * 50;
+  }
 
   const cat = {
     el: img,
@@ -166,7 +172,7 @@ document.addEventListener("touchend", () => {
 });
 
 rainBtn.addEventListener("click", () => {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 30; i++) {
     createCat(
       Math.random() * (window.innerWidth - 200),
       -Math.random() * 300
@@ -174,7 +180,7 @@ rainBtn.addEventListener("click", () => {
   }
 });
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 10; i++) {
   createCat(
     Math.random() * (window.innerWidth - 200),
     Math.random() * 200
